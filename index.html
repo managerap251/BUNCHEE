@@ -8585,7 +8585,7 @@ Object.assign(window, { CashierDailyByProject });
 // Main app shell: sidebar + topbar + page router
 
 const DEFAULTS = /*EDITMODE-BEGIN*/{
-  "role": "manager",
+  "role": "staff",
   "staffDept": "marketing",
   "showLogin": false,
   "compact": false,
@@ -8900,31 +8900,6 @@ function App() {
 
       {/* TWEAKS PANEL */}
       <TweaksPanel title="Tweaks">
-        <TweakSection label="บทบาท (Role)">
-          <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
-            {Object.values(ROLES).map(role => {
-              const sel = t.role === role.key;
-              const Icon = Icons[role.icon];
-              return (
-                <button key={role.key} onClick={()=>setTweak({role: role.key})} style={{
-                  display:'flex', alignItems:'center', gap:10, padding:'10px 12px', borderRadius:10,
-                  border: sel ? `2px solid ${role.color}` : '1px solid var(--line-2)',
-                  background: sel ? role.color+'15' : 'white',
-                  cursor:'pointer', fontFamily:'inherit', textAlign:'left', width:'100%'
-                }}>
-                  <div style={{ width:28, height:28, borderRadius:8, background:role.color+'22', color:role.color, display:'flex', alignItems:'center', justifyContent:'center' }}>
-                    <Icon size={16}/>
-                  </div>
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontSize:13, fontWeight:600 }}>{role.label}</div>
-                    <div style={{ fontSize:11, color:'var(--ink-3)' }}>{role.labelEn}</div>
-                  </div>
-                  {sel && <div style={{ width:18, height:18, borderRadius:'50%', background:role.color, color:'white', display:'flex', alignItems:'center', justifyContent:'center', fontSize:11 }}>✓</div>}
-                </button>
-              );
-            })}
-          </div>
-        </TweakSection>
 
         {role === 'staff' && (
           <TweakSection label="แผนกของพนักงาน">
@@ -8973,10 +8948,6 @@ function App() {
         <TweakSection label="หน้าจอ">
           <TweakToggle label="ไซด์บาร์แบบยุบ (Compact)" value={t.compact} onChange={v=>setTweak({compact: v})}/>
           <TweakToggle label="เชื่อมต่อ Google Sheets" value={t.sheetsConnected} onChange={v=>setTweak({sheetsConnected: v})}/>
-        </TweakSection>
-
-        <TweakSection label="หน้าทดสอบ">
-          <TweakButton onClick={()=>setTweak({showLogin: true})}>เปิดหน้า Login</TweakButton>
         </TweakSection>
       </TweaksPanel>
     </div>
